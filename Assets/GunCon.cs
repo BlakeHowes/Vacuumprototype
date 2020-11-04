@@ -12,10 +12,12 @@ public class GunCon : MonoBehaviour
     private GameObject Suction;
     [SerializeField]
     private GameObject Blow;
+    [SerializeField]
+    private GameObject BlowLocation;
     private float blowtimer;
     [SerializeField]
     private List<GameObject> Objectinvacuum = new List<GameObject>();
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetMouseButton(0) && !Input.GetMouseButton(1))
         {
@@ -42,20 +44,20 @@ public class GunCon : MonoBehaviour
         {
             Blow.SetActive(false);
         }
-    }
-    void Update()
-    {
         Rotatetowardsmouse();
     }
 
     //spins the gun
     private void Rotatetowardsmouse()
     {
-        var mouse = Input.mousePosition;
-        var screenPoint = Camera.main.WorldToScreenPoint(transform.localPosition);
-        var offset = new Vector2(mouse.x - screenPoint.x, mouse.y - screenPoint.y);
-        var angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        var mouse_pos = Input.mousePosition;
+        mouse_pos.z = 5.23f; //The distance between the camera and object
+        var object_pos = Camera.main.WorldToScreenPoint(transform.position);
+        mouse_pos.x = mouse_pos.x - object_pos.x;
+        mouse_pos.y = mouse_pos.y - object_pos.y;
+
+        var angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     //returns the distance to the wall
@@ -119,7 +121,7 @@ public class GunCon : MonoBehaviour
         if(lastobject > 0)
         {
             Objectinvacuum[lastobject - 1].SetActive(true);
-            Objectinvacuum[lastobject - 1].transform.position = transform.position; //change this to end of gun
+            Objectinvacuum[lastobject - 1].transform.position = BlowLocation.transform.position;
             Objectinvacuum[lastobject - 1].transform.rotation = Quaternion.identity;
             Objectinvacuum.Remove(Objectinvacuum[lastobject-1]);
         }
