@@ -29,29 +29,12 @@ public class CharMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y);
         }
-
-        if (Input.GetKey(KeyCode.Z))
-        {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right);
-            LayerMask mask = LayerMask.GetMask("Ground");
-            if (Physics2D.Raycast(transform.position, transform.TransformDirection(Vector3.right), jumprange, layer))
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * hit.distance, Color.yellow);
-                Debug.Log("Did Hit");
-            }
-            else
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * hit.distance, Color.red);
-                Debug.Log("Didn't Hit");
-            }
-        }
     }
 
     private bool CheckifGrounded()
     {
-        LayerMask mask = LayerMask.GetMask("Wall");
         bool grounded = false;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(-Vector2.up), jumprange, mask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(-Vector2.up), jumprange, layer);
         if (hit.collider != null)
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(-Vector2.up) * hit.distance, Color.red);

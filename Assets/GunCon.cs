@@ -13,6 +13,8 @@ public class GunCon : MonoBehaviour
     [SerializeField]
     private GameObject Blow;
     [SerializeField]
+    private GameObject Camera;
+    [SerializeField]
     private GameObject BlowLocation;
     [SerializeField]
     private Collider2D Gunentrance;
@@ -25,6 +27,8 @@ public class GunCon : MonoBehaviour
         {
             Suction.SetActive(true);
             ScaleSuction();
+
+            //EnterGunBoxCheck();
         }
         else
         {
@@ -54,7 +58,7 @@ public class GunCon : MonoBehaviour
     {
         var mouse_pos = Input.mousePosition;
         mouse_pos.z = 5.23f; //The distance between the camera and object
-        var object_pos = Camera.main.WorldToScreenPoint(transform.position);
+        var object_pos = UnityEngine.Camera.main.WorldToScreenPoint(transform.position);
         mouse_pos.x = mouse_pos.x - object_pos.x;
         mouse_pos.y = mouse_pos.y - object_pos.y;
 
@@ -90,6 +94,8 @@ public class GunCon : MonoBehaviour
 
         Suction.transform.localScale = scaleupdate;
         Suction.transform.localPosition = positionupdate;
+
+        Camera.GetComponent<DynamicCamera>().camerashake(); //camerashake
     }
 
     private void ScaleBlow()
@@ -100,6 +106,8 @@ public class GunCon : MonoBehaviour
 
         Blow.transform.localScale = scaleupdate;
         Blow.transform.localPosition = positionupdate;
+
+        Camera.GetComponent<DynamicCamera>().camerashake(); //camerashake
     }
 
     //This is the collision for removing and object from the scene by setting it to inactive and adding it to the Objectinvacuum list
@@ -117,7 +125,7 @@ public class GunCon : MonoBehaviour
 
     private void EnterGunBoxCheck()
     {
-        int i = 1;
+        int i = 10;
         Collider2D[] Objects = new Collider2D[i];
         ContactFilter2D contact = new ContactFilter2D();
         contact.layerMask = LayerMask.GetMask("VacuumObject");
