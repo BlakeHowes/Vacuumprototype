@@ -14,6 +14,8 @@ public class GunCon : MonoBehaviour
     private GameObject Blow;
     [SerializeField]
     private GameObject BlowLocation;
+    [SerializeField]
+    private Collider2D Gunentrance;
     private float blowtimer;
     [SerializeField]
     private List<GameObject> Objectinvacuum = new List<GameObject>();
@@ -110,6 +112,20 @@ public class GunCon : MonoBehaviour
                 Objectinvacuum.Add(collision.gameObject);
                 collision.gameObject.SetActive(false);
             }
+        }
+    }
+
+    private void EnterGunBoxCheck()
+    {
+        int i = 1;
+        Collider2D[] Objects = new Collider2D[i];
+        ContactFilter2D contact = new ContactFilter2D();
+        contact.layerMask = LayerMask.GetMask("VacuumObject");
+        Physics2D.OverlapCollider(Gunentrance, contact, Objects);
+        for (i = 0; i < 10; i++)
+        {
+            Objectinvacuum.Add(Objects[i].gameObject);
+            Objects[i].gameObject.SetActive(false);
         }
     }
 
