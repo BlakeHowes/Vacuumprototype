@@ -9,11 +9,16 @@ public class GunCon : MonoBehaviour
     [SerializeField]
     private float Blowdelay;
     [SerializeField]
+    private float recoilscale;
+    [SerializeField]
     private GameObject Suction;
     [SerializeField]
     private GameObject Blow;
     [SerializeField]
     private GameObject Camera;
+    [SerializeField]
+    private GameObject Player;
+    private Rigidbody2D prb;
     [SerializeField]
     private GameObject BlowLocation;
     [SerializeField]
@@ -21,17 +26,23 @@ public class GunCon : MonoBehaviour
     private float blowtimer;
     [SerializeField]
     private List<GameObject> Objectinvacuum = new List<GameObject>();
-    private void Update()
+
+    private void Awake()
+    {
+        prb = Player.GetComponent<Rigidbody2D>();
+    }
+    private void FixedUpdate()
     {
         if (Input.GetMouseButton(0) && !Input.GetMouseButton(1))
         {
+            Gunentrance.enabled = true;
             Suction.SetActive(true);
             ScaleSuction();
-
-            //EnterGunBoxCheck();
+            Disablefixedjoints();
         }
         else
         {
+            Gunentrance.enabled = false;
             Suction.SetActive(false);
         }
 
@@ -85,6 +96,22 @@ public class GunCon : MonoBehaviour
         return distancetohit;
     }
 
+    private void Disablefixedjoints()
+    {
+        LayerMask mask = LayerMask.GetMask("VacuumObject");
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, transform.TransformDirection(Vector3.right), Range, mask);
+        if(hit.collider != null)
+        {
+            if (hit.collider.gameObject.TryGetComponent(out FixedJoint2D joint))
+            {
+                if (joint != null)
+                {
+                    joint.enabled = (false);
+                }
+            }
+        }
+    }
+
     //scaling and chaning the local position so the vacuum doesnt go through walls
     private void ScaleSuction()
     {
@@ -123,20 +150,6 @@ public class GunCon : MonoBehaviour
         }
     }
 
-    private void EnterGunBoxCheck()
-    {
-        int i = 10;
-        Collider2D[] Objects = new Collider2D[i];
-        ContactFilter2D contact = new ContactFilter2D();
-        contact.layerMask = LayerMask.GetMask("VacuumObject");
-        Physics2D.OverlapCollider(Gunentrance, contact, Objects);
-        for (i = 0; i < 10; i++)
-        {
-            Objectinvacuum.Add(Objects[i].gameObject);
-            Objects[i].gameObject.SetActive(false);
-        }
-    }
-
     //this removes objects from the Objectinvacuum list and sets the to active
     //not this can easily be changed to do weird shit, like clone objects ect
     private void blowobjectsout()
@@ -147,7 +160,9 @@ public class GunCon : MonoBehaviour
             Objectinvacuum[lastobject - 1].SetActive(true);
             Objectinvacuum[lastobject - 1].transform.position = BlowLocation.transform.position;
             Objectinvacuum[lastobject - 1].transform.rotation = Quaternion.identity;
-            Objectinvacuum.Remove(Objectinvacuum[lastobject-1]);
+            float recoil = Objectinvacuum[lastobject - 1].gameObject.GetComponent<Rigidbody2D>().mass * recoilscale;
+            Objectinvacuum.Remove(Objectinvacuum[lastobject - 1]);
+            prb.AddForce(transform.TransformDirection(Vector2.left) * 1000 * recoilscale);
         }
     }
 }
