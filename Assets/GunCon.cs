@@ -158,9 +158,14 @@ public class GunCon : MonoBehaviour
         if(lastobject > 0)
         {
             Objectinvacuum[lastobject - 1].SetActive(true);
+
+            if(Objectinvacuum[lastobject - 1].gameObject.TryGetComponent<Rocket>(out Rocket rocket))
+            {
+                rocket.GetComponent<Rocket>().TurnOffSeeking();
+            }
             Objectinvacuum[lastobject - 1].transform.position = BlowLocation.transform.position;
-            Objectinvacuum[lastobject - 1].transform.rotation = Quaternion.identity;
-            float recoil = Objectinvacuum[lastobject - 1].gameObject.GetComponent<Rigidbody2D>().mass * recoilscale;
+            Quaternion oppositedirection = Quaternion.Euler(0,0,transform.rotation.z + 180);
+            Objectinvacuum[lastobject - 1].transform.rotation = oppositedirection;
             Objectinvacuum.Remove(Objectinvacuum[lastobject - 1]);
             prb.AddForce(transform.TransformDirection(Vector2.left) * 1000 * recoilscale);
         }
