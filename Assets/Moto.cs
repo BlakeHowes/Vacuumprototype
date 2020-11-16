@@ -20,7 +20,6 @@ public class Moto : MonoBehaviour
         JointMotor2D motor = wheel1.motor;
         motor.motorSpeed = CurrentSpeed;
 
-
         if (wheel1.jointSpeed != 0)
         {
             currentFuel -= Time.deltaTime;
