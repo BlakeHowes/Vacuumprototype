@@ -8,6 +8,7 @@ public class CharMovement : MonoBehaviour
     public float speed;
     public float dampening;
     public float jumprange;
+    public float wallrange;
     public float jumpForce;
     public float maxVelocity;
     public LayerMask Walkablesurfaces;
@@ -25,6 +26,14 @@ public class CharMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(Input.GetAxisRaw("Horizontal") != 0)
+        {
+            if(CheckWall() == false)
+            {
+
+            }
+        }
+
         if(CarMode == true)
         {
             horizontalvelocity = rb.velocity.x + (Carrb.velocity.x / carvelocityscaling);
@@ -78,13 +87,40 @@ public class CharMovement : MonoBehaviour
         return Grounded;
     }
 
+    public bool CheckWallRight()
+    {
+        Vector2 Pos = (Vector2)transform.position + new Vector2(wallrange, 0);
+        Vector2 Scale = (Vector2)transform.localScale + new Vector2(0, wallrange);
+        bool NextToWall = Physics2D.OverlapBox(Pos, Scale, 0, Walkablesurfaces);
+        return NextToWall;
+    }
+
+    public bool CheckWallLeft()
+    {
+        bool NextToWall = false;
+        if (CheckWallRight() == false)
+        {
+            Vector2 Pos = (Vector2)transform.position + new Vector2(-wallrange, 0);
+            Vector2 Scale = (Vector2)transform.localScale + new Vector2(0, wallrange);
+            NextToWall = Physics2D.OverlapBox(Pos, Scale, 0, Walkablesurfaces);
+        }
+        return NextToWall;
+    }
     void OnDrawGizmos()
     {
         Vector2 Pos = (Vector2)transform.position + new Vector2(0, -jumprange);
         Vector2 Scale = (Vector2)transform.localScale + new Vector2(jumprange, 0);
+        Vector2 Po2s = (Vector2)transform.position + new Vector2(wallrange, 0);
+        Vector2 Scale2 = (Vector2)transform.localScale + new Vector2(0, wallrange);
+        Vector2 Pos3 = (Vector2)transform.position + new Vector2(-wallrange, 0);
+        Vector2 Scale3 = (Vector2)transform.localScale + new Vector2(0, wallrange);
         Gizmos.color = Color.red;
         if (Input.GetAxisRaw("Vertical") != 0)
             Gizmos.DrawWireCube(Pos, Scale);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(Po2s, Scale2);
+        Gizmos.DrawWireCube(Pos3, Scale3);
     }
 }
 
