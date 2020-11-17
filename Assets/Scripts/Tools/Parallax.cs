@@ -16,7 +16,7 @@ public class Parallax : MonoBehaviour
         cam = Camera.main.transform;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (distanceX != 0f)
         {

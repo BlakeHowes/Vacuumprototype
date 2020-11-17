@@ -26,7 +26,8 @@ public class GunCon : MonoBehaviour
     private float blowtimer;
     [SerializeField]
     private List<GameObject> Objectinvacuum = new List<GameObject>();
-
+    [SerializeField]
+    private ParticleSystem Beam;
     private void Awake()
     {
         prb = Player.GetComponent<Rigidbody2D>();
@@ -39,6 +40,8 @@ public class GunCon : MonoBehaviour
             Suction.SetActive(true);
             ScaleSuction();
             Disablefixedjoints();
+
+            Beam.Play(true);
         }
         else
         {

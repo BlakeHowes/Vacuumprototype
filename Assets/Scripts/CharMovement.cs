@@ -12,14 +12,28 @@ public class CharMovement : MonoBehaviour
     public float maxVelocity;
     public LayerMask Walkablesurfaces;
     private float groundtimer;
+    public GameObject Car;
+    private Rigidbody2D Carrb;
+    public float carvelocityscaling;
+    public bool CarMode;
+    private float horizontalvelocity;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Carrb = Car.GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
     {
-        float horizontalvelocity = rb.velocity.x;
+        if(CarMode == true)
+        {
+            horizontalvelocity = rb.velocity.x + (Carrb.velocity.x / carvelocityscaling);
+        }
+        else
+        {
+            horizontalvelocity = rb.velocity.x;
+        }
+
         horizontalvelocity += Input.GetAxisRaw("Horizontal") * speed;
         if (!Input.GetMouseButton(1) || Input.GetAxisRaw("Horizontal") != 0)
         {
@@ -42,6 +56,18 @@ public class CharMovement : MonoBehaviour
             }
         }
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            CarMode = false;
+        }
+        if (collision.gameObject.tag == "Car")
+        {
+            CarMode = true;
+        }
     }
 
     public bool CheckGround()

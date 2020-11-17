@@ -9,7 +9,6 @@ public class Moto : MonoBehaviour
     public float SpeedSetting;
     public float currentFuel;
     public float consumptionRate;
-
     private void Start()
     {
 
