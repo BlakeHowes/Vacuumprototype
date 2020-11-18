@@ -14,7 +14,7 @@ public class EnemyCar : MonoBehaviour
     [SerializeField]
     private HingeJoint2D Wheel;
     public float timer;
-    private float SpeedMatchScaleTemp;
+    public float SpeedMatchScaleTemp;
     void Start()
     {
         SpeedMatchScaleTemp = SpeedMatchScale;
@@ -39,9 +39,9 @@ public class EnemyCar : MonoBehaviour
         }
         timer += Time.deltaTime;
 
-        if(timer > Random.Range(2,10))
+        if(timer > Random.Range(10,15))
         {
-            SpeedMatchScaleTemp = Random.Range(SpeedMatchScale - 3, SpeedMatchScale + 3);
+            SpeedMatchScaleTemp = Random.Range(SpeedMatchScale - 12, SpeedMatchScale + 15);
             timer = 0f;
         }
     }

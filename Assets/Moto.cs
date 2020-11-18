@@ -9,20 +9,14 @@ public class Moto : MonoBehaviour
     public float SpeedSetting;
     public float currentFuel;
     public float consumptionRate;
-    private void Start()
-    {
-
-    }
-    // Update is called once per frame
+    public BoxCollider2D Intake;
     void FixedUpdate()
     {
+        //Motor
         JointMotor2D motor = wheel1.motor;
         motor.motorSpeed = CurrentSpeed;
 
-        if (wheel1.jointSpeed != 0)
-        {
-            currentFuel -= Time.deltaTime;
-        }
+        currentFuel -= Time.deltaTime * consumptionRate;
 
         if (currentFuel <= 0)
         {
@@ -33,28 +27,48 @@ public class Moto : MonoBehaviour
             CurrentSpeed = SpeedSetting;
         }
 
-        if (currentFuel > 1500)
-        {
-            currentFuel = 1500; //turn off intake
-        }
-
         if (currentFuel < 0)
         {
             currentFuel = 0;
         }
 
         wheel1.motor = motor;
+
+        //intake
+        if (currentFuel > 1500)
+        {
+            Intake.enabled = false;
+        }
+        else
+        {
+            Intake.enabled = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "VacuumObject")
+        {
+            currentFuel += 10;
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public void Off()
+    {
+        SpeedSetting = 0;
+        consumptionRate = 0;
     }
 
     public void LowGear()
     {
-        SpeedSetting = 2;
+        SpeedSetting = 10;
         consumptionRate = 1;
     }
 
     public void HighGear()
     {
-        SpeedSetting = 5;
+        SpeedSetting = 40;
         consumptionRate = 3;
     }
 }

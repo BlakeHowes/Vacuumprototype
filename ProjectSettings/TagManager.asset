@@ -23,7 +23,7 @@ TagManager:
   - post
   - Wheel
   - Ground
-  - 
+  - Button
   - 
   - 
   - 
@@ -55,6 +55,15 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 3247974249
+    locked: 0
+  - name: Car
+    uniqueID: 1033689171
+    locked: 0
+  - name: EnemyCar
+    uniqueID: 2404450357
+    locked: 0
+  - name: Effects
+    uniqueID: 2016351961
     locked: 0
   - name: Default
     uniqueID: 0

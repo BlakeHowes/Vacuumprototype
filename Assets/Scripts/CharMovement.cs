@@ -37,10 +37,8 @@ public class CharMovement : MonoBehaviour
         }
 
         horizontalvelocity += Input.GetAxisRaw("Horizontal") * speed;
-        if (!Input.GetMouseButton(1) || Input.GetAxisRaw("Horizontal") != 0)
-        {
-            horizontalvelocity *= Mathf.Pow(0.5f, Time.deltaTime * dampening);
-        }
+        horizontalvelocity *= Mathf.Pow(0.5f, Time.deltaTime * dampening);
+
 
         if (CheckWallRight() == true && Input.GetAxisRaw("Horizontal") == 1 || CheckWallLeft() == true && Input.GetAxisRaw("Horizontal") == -1)
         {

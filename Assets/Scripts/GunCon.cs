@@ -40,7 +40,7 @@ public class GunCon : MonoBehaviour
             Suction.SetActive(true);
             ScaleSuction();
             Disablefixedjoints();
-
+            PressButton();
             Beam.Play(true);
         }
         else
@@ -112,6 +112,16 @@ public class GunCon : MonoBehaviour
                     joint.enabled = (false);
                 }
             }
+        }
+    }
+
+    private void PressButton()
+    {
+        LayerMask mask = LayerMask.GetMask("Button");
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, transform.TransformDirection(Vector3.right), Range, mask);
+        if (hit.collider != null)
+        {
+            hit.collider.gameObject.GetComponent<Button>().Press();
         }
     }
 
