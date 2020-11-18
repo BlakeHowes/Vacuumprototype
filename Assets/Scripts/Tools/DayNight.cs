@@ -1,18 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Experimental.Rendering.Universal;
 public class DayNight : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Light2D global;
+    public float Max;
+    public float Min;
+    public float speed;
+    private bool direction = true;
+    private void Start()
     {
-        
+        global.intensity = Min;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        float intensity = global.intensity;
+        if (intensity >= Max)  {
+            direction = false;   }
+        if (intensity <= Min)  {
+            direction = true;  }
+        if(direction == true)
+            global.intensity += Time.deltaTime * speed;
+        if (direction == false)
+            global.intensity -= Time.deltaTime * speed;
     }
 }
