@@ -12,6 +12,7 @@ public class CharMovement : MonoBehaviour
     public float jumpForce;
     public float maxVelocity;
     public LayerMask Walkablesurfaces;
+    public LayerMask CarWalls;
     private float groundtimer;
     public GameObject Car;
     private Rigidbody2D Carrb;
@@ -26,14 +27,6 @@ public class CharMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Input.GetAxisRaw("Horizontal") != 0)
-        {
-            if(CheckWall() == false)
-            {
-
-            }
-        }
-
         if(CarMode == true)
         {
             horizontalvelocity = rb.velocity.x + (Carrb.velocity.x / carvelocityscaling);
@@ -49,7 +42,15 @@ public class CharMovement : MonoBehaviour
             horizontalvelocity *= Mathf.Pow(0.5f, Time.deltaTime * dampening);
         }
 
-        rb.velocity = new Vector2(horizontalvelocity, rb.velocity.y);
+        if (CheckWallRight() == true && Input.GetAxisRaw("Horizontal") == 1 || CheckWallLeft() == true && Input.GetAxisRaw("Horizontal") == -1)
+        {
+            float normalvelocity = rb.velocity.x;
+            rb.velocity = new Vector2(normalvelocity, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(horizontalvelocity, rb.velocity.y);
+        }
 
         if(groundtimer < 1)
         {
@@ -64,6 +65,7 @@ public class CharMovement : MonoBehaviour
                 groundtimer = 0;
             }
         }
+
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
     }
 
@@ -91,7 +93,7 @@ public class CharMovement : MonoBehaviour
     {
         Vector2 Pos = (Vector2)transform.position + new Vector2(wallrange, 0);
         Vector2 Scale = (Vector2)transform.localScale + new Vector2(0, wallrange);
-        bool NextToWall = Physics2D.OverlapBox(Pos, Scale, 0, Walkablesurfaces);
+        bool NextToWall = Physics2D.OverlapBox(Pos, Scale, 0, CarWalls);
         return NextToWall;
     }
 
@@ -102,7 +104,7 @@ public class CharMovement : MonoBehaviour
         {
             Vector2 Pos = (Vector2)transform.position + new Vector2(-wallrange, 0);
             Vector2 Scale = (Vector2)transform.localScale + new Vector2(0, wallrange);
-            NextToWall = Physics2D.OverlapBox(Pos, Scale, 0, Walkablesurfaces);
+            NextToWall = Physics2D.OverlapBox(Pos, Scale, 0, CarWalls);
         }
         return NextToWall;
     }
