@@ -28,6 +28,8 @@ public class GunCon : MonoBehaviour
     private List<GameObject> Objectinvacuum = new List<GameObject>();
     [SerializeField]
     private ParticleSystem Beam;
+    private float jointtimer;
+    private GameObject Targetedfixedjoint;
     private void Awake()
     {
         prb = Player.GetComponent<Rigidbody2D>();
@@ -47,6 +49,11 @@ public class GunCon : MonoBehaviour
         {
             Gunentrance.enabled = false;
             Suction.SetActive(false);
+        }
+
+        if (!Input.GetMouseButton(0))
+        {
+            jointtimer = 0f;
         }
 
         if (Input.GetMouseButton(1) && !Input.GetMouseButton(0))
@@ -107,9 +114,18 @@ public class GunCon : MonoBehaviour
         {
             if (hit.collider.gameObject.TryGetComponent(out FixedJoint2D joint))
             {
+                if (hit.collider.gameObject != Targetedfixedjoint)
+                {
+                    Targetedfixedjoint = hit.collider.gameObject;
+                    jointtimer = 0f;
+                }
                 if (joint != null)
                 {
-                    joint.enabled = (false);
+                    jointtimer += Time.deltaTime;
+                    if(jointtimer > 1)
+                    {
+                        joint.enabled = (false);
+                    }
                 }
             }
         }
@@ -176,6 +192,11 @@ public class GunCon : MonoBehaviour
             {
                 rocket.GetComponent<Rocket>().TurnOffSeeking();
             }
+            if (Objectinvacuum[lastobject - 1].gameObject.TryGetComponent(out FixedJoint2D joint))
+            {
+                joint.enabled = false;
+            }
+
             Objectinvacuum[lastobject - 1].transform.position = BlowLocation.transform.position;
             Quaternion oppositedirection = Quaternion.Euler(0,0,transform.rotation.z + 180);
             Objectinvacuum[lastobject - 1].transform.rotation = oppositedirection;

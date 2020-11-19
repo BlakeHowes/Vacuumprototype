@@ -35,7 +35,7 @@ public class Moto : MonoBehaviour
         wheel1.motor = motor;
 
         //intake
-        if (currentFuel > 1500)
+        if (currentFuel > 150)
         {
             Intake.enabled = false;
         }
