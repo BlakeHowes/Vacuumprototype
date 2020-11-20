@@ -13,8 +13,10 @@ public class EnemyCar : MonoBehaviour
     private float SpeedMatchScale;
     [SerializeField]
     private HingeJoint2D Wheel;
-    public float timer;
-    public float SpeedMatchScaleTemp;
+    [SerializeField]
+    private List<GameObject> HealthObjects = new List<GameObject>();
+    private float timer;
+    private float SpeedMatchScaleTemp;
     void Start()
     {
         SpeedMatchScaleTemp = SpeedMatchScale;
@@ -44,6 +46,19 @@ public class EnemyCar : MonoBehaviour
             SpeedMatchScaleTemp = Random.Range(SpeedMatchScale - 12, SpeedMatchScale + 15);
             timer = 0f;
         }
+
+        if(HealthObjects.Count == 0)
+        {
+            DestroyCar();
+        }
+
+        foreach(GameObject obj in HealthObjects)
+        {
+            if(obj == null)
+            {
+                HealthObjects.Remove(obj);
+            }
+        }
     }
     private void DriveLeft()
     {
@@ -58,5 +73,18 @@ public class EnemyCar : MonoBehaviour
         motor.motorSpeed = Speed;
 
         Wheel.motor = motor;
+    }
+
+    private void DestroyCar()
+    {
+        Destroy(gameObject);
+    }
+
+    public void RemoveHealthObject(GameObject obj)
+    {
+        if (HealthObjects.Contains(obj))
+        {
+            HealthObjects.Remove(obj);
+        }
     }
 }

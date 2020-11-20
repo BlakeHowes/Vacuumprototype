@@ -16,13 +16,13 @@ MonoBehaviour:
   m_AdvancedMode: 0
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.74294156, y: 0.6656338, z: 1, w: 0}
+    m_Value: {x: 1, y: 0.9745661, z: 0.9632863, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.58772546, y: 1, z: 0.6038552, w: 0}
+    m_Value: {x: 0.9183628, y: 1, z: 0.9203079, w: 0}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.66812885, z: 0.99086654, w: 0}
+    m_Value: {x: 1, y: 0.75264627, z: 0.68179107, w: 0}
 --- !u!114 &-2683202428428311842
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -160,13 +160,13 @@ MonoBehaviour:
   m_AdvancedMode: 0
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.106761575}
+    m_Value: {x: 1, y: 0.9493748, z: 0.7974998, w: -0.17793588}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.1779358}
+    m_Value: {x: 0.99910676, y: 0.89775664, z: 1, w: 0.48042688}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.106761545}
+    m_Value: {x: 1, y: 0.9471192, z: 0.85132045, w: 0.017793566}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0

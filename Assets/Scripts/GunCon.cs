@@ -60,6 +60,7 @@ public class GunCon : MonoBehaviour
         {
             Blow.SetActive(true);
             ScaleBlow();
+            Beam.Play(true);
             blowtimer += Time.deltaTime;
             if(blowtimer > Blowdelay)
             {
