@@ -5,16 +5,20 @@ using UnityEngine;
 public class Enemy3 : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private float horizontalvelocity;
     private Rigidbody2D Carrb;
+    private float horizontalvelocity; 
     public float carvelocityscaling;
     public float dampening;
-    public float range;
     public float radius;
+    public float range;
     public float speed;
-    public bool seePlayer;
     public bool CarMode;
+    public bool DetectedClose;
+    public bool Detected;
+    public bool isFiring;
+    public bool seePlayer;    
     public Transform player;
+    public LayerMask Player;
     public GameObject Car;
 
     void Awake()
@@ -26,16 +30,22 @@ public class Enemy3 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Detected = Physics2D.OverlapCircle(gameObject.transform.position, radius, player);
+        DetectedClose = Physics2D.OverlapCircle(gameObject.transform.position, radius, Player);
+        Detected = Physics2D.OverlapCircle(gameObject.transform.position, radius, Player);
 
-        if (Detected)
+        if (DetectedClose)
         {
             rb.AddForce(player.transform.position - transform.position);
-            Debug.Log("Move Left");
+            Debug.Log("Detected");
         }
         else
         {
-            Debug.Log("Move Right");
+            Debug.Log("Not Detected");
+        }
+
+        if (Detected)
+        {            
+            GetComponent<EnemyGun>().ShootGun();
         }
 
         if (CarMode == true)
@@ -47,7 +57,7 @@ public class Enemy3 : MonoBehaviour
             horizontalvelocity = rb.velocity.x;
         }
 
-        horizontalvelocity += transform.position.x * speed;
+        horizontalvelocity += rb.velocity.x * speed;
         horizontalvelocity *= Mathf.Pow(0.5f, Time.deltaTime * dampening);
     }
 
@@ -63,9 +73,10 @@ public class Enemy3 : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(gameObject.transform.position, radius);
+        Gizmos.DrawWireSphere(gameObject.transform.position, range);
     }
 }
