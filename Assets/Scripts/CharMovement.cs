@@ -19,24 +19,38 @@ public class CharMovement : MonoBehaviour
     public float carvelocityscaling;
     public bool CarMode;
     private float horizontalvelocity;
+    public bool spacemode;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Carrb = Car.GetComponent<Rigidbody2D>();
+        if(Car != null)
+        {
+            Carrb = Car.GetComponent<Rigidbody2D>();
+        }
     }
 
     void FixedUpdate()
     {
-        if(CarMode == true)
-        {
-            horizontalvelocity = rb.velocity.x + (Carrb.velocity.x / carvelocityscaling);
-        }
-        else
+        if(CarMode == false)
         {
             horizontalvelocity = rb.velocity.x;
         }
+        else
+        {
+            horizontalvelocity = rb.velocity.x + (Carrb.velocity.x / carvelocityscaling);
+        }
+        if(spacemode == false)
+        {
+            horizontalvelocity += Input.GetAxisRaw("Horizontal") * speed;
+        }
+        else
+        {
+            if (CheckGround())
+            {
+                horizontalvelocity += Input.GetAxisRaw("Horizontal") * speed;
+            }
+        }
 
-        horizontalvelocity += Input.GetAxisRaw("Horizontal") * speed;
         horizontalvelocity *= Mathf.Pow(0.5f, Time.deltaTime * dampening);
 
 

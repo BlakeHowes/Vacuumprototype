@@ -28,11 +28,19 @@ public class GunCon : MonoBehaviour
     private List<GameObject> Objectinvacuum = new List<GameObject>();
     [SerializeField]
     private ParticleSystem Beam;
+    [SerializeField]
+    private GameObject GunSprite;
+    [SerializeField]
+    private GameObject GunSprite2;
     private float jointtimer;
     private GameObject Targetedfixedjoint;
+    private float startxscale;
+    private float startxscale2;
     private void Awake()
     {
         prb = Player.GetComponent<Rigidbody2D>();
+        startxscale = GunSprite.transform.localScale[1];
+        startxscale2 = GunSprite2.transform.localScale[1];
     }
     private void FixedUpdate()
     {
@@ -44,6 +52,8 @@ public class GunCon : MonoBehaviour
             Disablefixedjoints();
             PressButton();
             Beam.Play(true);
+            GunSprite.SetActive(false);
+            GunSprite2.SetActive(true);
         }
         else
         {
@@ -56,13 +66,22 @@ public class GunCon : MonoBehaviour
             jointtimer = 0f;
         }
 
+        if (!Input.GetMouseButton(0) && !Input.GetMouseButton(1))
+        {
+            GunSprite.SetActive(true);
+            GunSprite2.SetActive(false);
+        }
+
         if (Input.GetMouseButton(1) && !Input.GetMouseButton(0))
         {
             Blow.SetActive(true);
             ScaleBlow();
             Beam.Play(true);
             blowtimer += Time.deltaTime;
-            if(blowtimer > Blowdelay)
+
+            GunSprite.SetActive(false);
+            GunSprite2.SetActive(true);
+            if (blowtimer > Blowdelay)
             {
                 blowobjectsout();
                 blowtimer = 0f;
@@ -85,6 +104,36 @@ public class GunCon : MonoBehaviour
         mouse_pos.y = mouse_pos.y - object_pos.y;
 
         var angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+
+        if (!Input.GetMouseButton(0) && !Input.GetMouseButton(1))
+        {
+            if (angle <= -90 || angle >= 90)
+            {
+                var scale = GunSprite.transform.localScale;
+                GunSprite.transform.localScale = new Vector3(scale[0], startxscale * -1, scale[2]);
+            }
+            else
+            {
+                var scale = GunSprite.transform.localScale;
+                GunSprite.transform.localScale = new Vector3(scale[0], startxscale, scale[2]);
+            }
+
+        }
+        else
+        {
+            if (angle <= -90 || angle >= 90)
+            {
+                var scale = GunSprite.transform.localScale;
+                GunSprite2.transform.localScale = new Vector3(scale[0], startxscale * -1, scale[2]);
+            }
+            else
+            {
+                var scale = GunSprite.transform.localScale;
+                GunSprite2.transform.localScale = new Vector3(scale[0], startxscale, scale[2]);
+            }
+        }
+
+
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
