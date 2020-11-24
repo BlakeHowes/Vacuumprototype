@@ -37,8 +37,16 @@ public class CharMovement : MonoBehaviour
         }
         else
         {
-            horizontalvelocity = rb.velocity.x + (Carrb.velocity.x / carvelocityscaling);
+            if(Input.GetAxisRaw("Horizontal") != 0)
+            {
+                horizontalvelocity = rb.velocity.x + (Carrb.velocity.x / carvelocityscaling);
+            }
+            else
+            {
+                horizontalvelocity = rb.velocity.x;
+            }
         }
+
         if(spacemode == false)
         {
             horizontalvelocity += Input.GetAxisRaw("Horizontal") * speed;
