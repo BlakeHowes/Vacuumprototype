@@ -11,6 +11,7 @@ public class Enemy3 : MonoBehaviour
     public float dampening;
     public float radius;
     public float range;
+    public float playerDist;
     public float speed;
     public bool CarMode;
     public bool DetectedClose;
@@ -32,6 +33,16 @@ public class Enemy3 : MonoBehaviour
     {
         DetectedClose = Physics2D.OverlapCircle(gameObject.transform.position, radius, Player);
         Detected = Physics2D.OverlapCircle(gameObject.transform.position, radius, Player);
+        rb.velocity = new Vector2(0f, 2f);
+
+        if (player.transform.position.x + range < transform.position.x)
+        {
+            
+        }
+        if (player.transform.position.x - range > transform.position.x)
+        {
+            
+        }
 
         if (DetectedClose)
         {

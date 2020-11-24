@@ -19314,8 +19314,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carvelocityscaling: 5.35
   dampening: 25
-  radius: 20
-  range: 40
+  radius: 30
+  range: 50
   speed: 10
   CarMode: 0
   DetectedClose: 0
@@ -19407,7 +19407,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830588053}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.4, y: -87.4, z: 0}
+  m_LocalPosition: {x: 49.6, y: -87.3, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1382706403}
