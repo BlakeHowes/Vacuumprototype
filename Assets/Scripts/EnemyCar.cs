@@ -17,6 +17,7 @@ public class EnemyCar : MonoBehaviour
     private List<GameObject> HealthObjects = new List<GameObject>();
     private float timer;
     private float SpeedMatchScaleTemp;
+
     void Start()
     {
         SpeedMatchScaleTemp = SpeedMatchScale;
@@ -85,6 +86,14 @@ public class EnemyCar : MonoBehaviour
         if (HealthObjects.Contains(obj))
         {
             HealthObjects.Remove(obj);
+        }
+    }
+
+    public void OnTriggerExit2D(Collision2D collision)
+    {
+        if(CarRoot)
+        {
+            Destroy(gameObject);
         }
     }
 }
