@@ -10,6 +10,7 @@ public class DynamicCamera : MonoBehaviour
     public Vector3 smoothedPosition;
     public Vector3 desiredPosition;
     public float offsetmax;
+    public float offsetpos;
     public float shakeforce;
     public float magnitudeofshake;
     void Awake()

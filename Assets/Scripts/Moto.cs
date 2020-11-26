@@ -10,6 +10,8 @@ public class Moto : MonoBehaviour
     public float currentFuel;
     public float consumptionRate;
     public BoxCollider2D Intake;
+    public int health = 100;
+
     void FixedUpdate()
     {
         //Motor
@@ -43,6 +45,11 @@ public class Moto : MonoBehaviour
         {
             Intake.enabled = true;
         }
+
+        if(health <=0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,6 +77,11 @@ public class Moto : MonoBehaviour
     {
         SpeedSetting = 40;
         consumptionRate = 3;
+    }
+
+    public void HealthDamage(int damage)
+    {
+        health -= damage;
     }
 }
 

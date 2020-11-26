@@ -11,6 +11,8 @@ public class GunCon : MonoBehaviour
     [SerializeField]
     private float recoilscale;
     [SerializeField]
+    private float BlowRandomization;
+    [SerializeField]
     private GameObject Suction;
     [SerializeField]
     private GameObject Blow;
@@ -28,11 +30,26 @@ public class GunCon : MonoBehaviour
     private List<GameObject> Objectinvacuum = new List<GameObject>();
     [SerializeField]
     private ParticleSystem Beam;
+    [SerializeField]
+    private GameObject GunSprite;
+    [SerializeField]
+    private GameObject GunSprite2;
     private float jointtimer;
     private GameObject Targetedfixedjoint;
+    private float startxscale;
+    [SerializeField]
+    private bool endlessmode = false;
+    [SerializeField]
+    private GameObject SpriteEmpty;
+
+    public float offsetmax;
+    public float shakeforce;
+    public float magnitudeofshake;
+    public float thrust;
     private void Awake()
     {
         prb = Player.GetComponent<Rigidbody2D>();
+        startxscale = GunSprite.transform.localScale[1];
     }
     private void FixedUpdate()
     {
@@ -44,6 +61,9 @@ public class GunCon : MonoBehaviour
             Disablefixedjoints();
             PressButton();
             Beam.Play(true);
+            GunSprite.SetActive(false);
+            GunSprite2.SetActive(true);
+            AddForceToPlayer(thrust);
         }
         else
         {
@@ -56,13 +76,28 @@ public class GunCon : MonoBehaviour
             jointtimer = 0f;
         }
 
+        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
+        {
+            StartCoroutine(Shake(0.1f, magnitudeofshake));
+        }
+
+        if (!Input.GetMouseButton(0) && !Input.GetMouseButton(1))
+        {
+            GunSprite.SetActive(true);
+            GunSprite2.SetActive(false);
+        }
+
         if (Input.GetMouseButton(1) && !Input.GetMouseButton(0))
         {
             Blow.SetActive(true);
             ScaleBlow();
             Beam.Play(true);
             blowtimer += Time.deltaTime;
-            if(blowtimer > Blowdelay)
+
+            GunSprite.SetActive(false);
+            GunSprite2.SetActive(true);
+            AddForceToPlayer(thrust * -1);
+            if (blowtimer > Blowdelay)
             {
                 blowobjectsout();
                 blowtimer = 0f;
@@ -85,6 +120,35 @@ public class GunCon : MonoBehaviour
         mouse_pos.y = mouse_pos.y - object_pos.y;
 
         var angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+
+        if (!Input.GetMouseButton(0) && !Input.GetMouseButton(1))
+        {
+            if (angle <= -90 || angle >= 90)
+            {
+                var scale = GunSprite.transform.localScale;
+                GunSprite.transform.localScale = new Vector3(scale[0], startxscale * -1, scale[2]);
+            }
+            else
+            {
+                var scale = GunSprite.transform.localScale;
+                GunSprite.transform.localScale = new Vector3(scale[0], startxscale, scale[2]);
+            }
+        }
+        else
+        {
+            if (angle <= -90 || angle >= 90)
+            {
+                var scale = GunSprite.transform.localScale;
+                GunSprite2.transform.localScale = new Vector3(scale[0], startxscale * -1, scale[2]);
+            }
+            else
+            {
+                var scale = GunSprite.transform.localScale;
+                GunSprite2.transform.localScale = new Vector3(scale[0], startxscale, scale[2]);
+            }
+        }
+
+
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
@@ -107,6 +171,37 @@ public class GunCon : MonoBehaviour
         return distancetohit;
     }
 
+    public IEnumerator Shake(float duration, float magnitude)
+    {
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            Vector3 offset = new Vector3(Player.transform.position.x * offsetmax, Player.transform.position.y * offsetmax, Player.transform.position.z * offsetmax);
+
+            float x = Random.Range(-shakeforce, shakeforce) * magnitude;
+            float y = Random.Range(-shakeforce, shakeforce) * magnitude;
+            float z = Random.Range(-shakeforce, shakeforce) * magnitude;
+
+            Vector3 pos = transform.position;
+
+            magnitude -= 0.02f;
+
+            Vector3 shake = new Vector3(x + pos[0], y + pos[1], z + pos[2]);
+            SpriteEmpty.transform.position = shake + offset;
+            elapsed += Time.deltaTime;
+            yield return 0;
+        }
+
+    }
+
+    public void AddForceToPlayer(float force)
+    {
+        var rb = Player.GetComponent<Rigidbody2D>();
+        rb.AddForce(transform.right * force);
+    }
+
     private void Disablefixedjoints()
     {
         LayerMask mask = LayerMask.GetMask("VacuumObject");
@@ -123,7 +218,7 @@ public class GunCon : MonoBehaviour
                 if (joint != null)
                 {
                     jointtimer += Time.deltaTime;
-                    if(jointtimer > 1)
+                    if(jointtimer > 0.2)
                     {
                         joint.enabled = (false);
                     }
@@ -197,11 +292,21 @@ public class GunCon : MonoBehaviour
             {
                 joint.enabled = false;
             }
-
-            Objectinvacuum[lastobject - 1].transform.position = BlowLocation.transform.position;
+            Vector3 RandomOffset = new Vector3(Random.Range(-BlowRandomization, BlowRandomization), Random.Range(-BlowRandomization, BlowRandomization), Random.Range(-BlowRandomization, BlowRandomization));
+            if(endlessmode == false)
+            {
+                Objectinvacuum[lastobject - 1].transform.position = BlowLocation.transform.position + RandomOffset;
+            }
+            else
+            {
+                Instantiate(Objectinvacuum[lastobject - 1], BlowLocation.transform.position + RandomOffset, Quaternion.identity);
+            }
             Quaternion oppositedirection = Quaternion.Euler(0,0,transform.rotation.z + 180);
             Objectinvacuum[lastobject - 1].transform.rotation = oppositedirection;
-            Objectinvacuum.Remove(Objectinvacuum[lastobject - 1]);
+            if(endlessmode == false)
+            {
+                Objectinvacuum.Remove(Objectinvacuum[lastobject - 1]);
+            }
             prb.AddForce(transform.TransformDirection(Vector2.left) * 1000 * recoilscale);
         }
     }
