@@ -17,10 +17,18 @@ public class EnemyCar : MonoBehaviour
     private List<GameObject> HealthObjects = new List<GameObject>();
     private float timer;
     private float SpeedMatchScaleTemp;
-
+    private float DeathTimer;
+    [SerializeField]
+    private ParticleSystem fire;
+    [SerializeField]
+    private ParticleSystem sparks;
+    [SerializeField]
+    private GameObject DeathChunkEmpty;
     void Start()
     {
         SpeedMatchScaleTemp = SpeedMatchScale;
+        fire.Pause(true);
+        sparks.Pause(true);
     }
 
     void Update()
@@ -50,7 +58,14 @@ public class EnemyCar : MonoBehaviour
 
         if(HealthObjects.Count == 0)
         {
-            DestroyCar();
+            fire.Play(true);
+            sparks.Play(true);
+            DeathTimer += Time.deltaTime;
+            if (DeathTimer > 5)
+            {
+                Instantiate(DeathChunkEmpty, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
         }
 
         foreach(GameObject obj in HealthObjects)

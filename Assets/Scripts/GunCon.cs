@@ -42,6 +42,7 @@ public class GunCon : MonoBehaviour
     [SerializeField]
     private GameObject SpriteEmpty;
 
+    public float BeamScale;
     public float offsetmax;
     public float shakeforce;
     public float magnitudeofshake;
@@ -208,11 +209,17 @@ public class GunCon : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, transform.TransformDirection(Vector3.right), Range, mask);
         if(hit.collider != null)
         {
+            GameObject target = hit.collider.gameObject;
             if (hit.collider.gameObject.TryGetComponent(out FixedJoint2D joint))
             {
-                if (hit.collider.gameObject != Targetedfixedjoint)
+                if(target.GetComponent<Rigidbody2D>().mass < 1) //set mass of object if below 1
                 {
-                    Targetedfixedjoint = hit.collider.gameObject;
+                    target.GetComponent<Rigidbody2D>().mass = 1;
+                }
+
+                if (target != Targetedfixedjoint)
+                {
+                    Targetedfixedjoint = target;
                     jointtimer = 0f;
                 }
                 if (joint != null)
@@ -246,7 +253,7 @@ public class GunCon : MonoBehaviour
 
         Suction.transform.localScale = scaleupdate;
         Suction.transform.localPosition = positionupdate;
-
+        Beam.startLifetime = suctionlength/BeamScale;
         Camera.GetComponent<DynamicCamera>().camerashake(); //camerashake
     }
 
