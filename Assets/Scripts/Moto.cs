@@ -11,7 +11,14 @@ public class Moto : MonoBehaviour
     public float consumptionRate;
     public BoxCollider2D Intake;
     public int health = 100;
+    public ParticleSystem sparks;
+    public ParticleSystem sparks2;
 
+    private void Awake()
+    {
+        sparks.Pause();
+        sparks2.Pause();
+    }
     void FixedUpdate()
     {
         //Motor
@@ -46,6 +53,8 @@ public class Moto : MonoBehaviour
     {
         if(collision.gameObject.tag == "VacuumObject")
         {
+            sparks.Play();
+            sparks2.Play();
             currentFuel += 10;
             Destroy(collision.gameObject);
         }

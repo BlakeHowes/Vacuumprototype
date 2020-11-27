@@ -293,6 +293,10 @@ public class GunCon : MonoBehaviour
             {
                 Objectinvacuum.Add(collision.gameObject);
                 collision.gameObject.SetActive(false);
+                if (collision.TryGetComponent<ChunkCon>(out ChunkCon chunkcon))
+                {
+                    chunkcon.RemoveChunk();
+                }
             }
         }
     }
