@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class EnemyTurret : MonoBehaviour
 {
-    public int damage;
     public bool Detected;
     public float radius;
     public GameObject Car;
     public LayerMask Player;
-    public GameObject bullet;
+    public TurretBullet bullet;
+    public Transform firePoint;
+    public float fireRate;
+    public float fireRateTimer;
 
     void FixedUpdate()
     {
         Detected = Physics2D.OverlapCircle(gameObject.transform.position, radius, Player);
     }
 
-    void ShootTurret()
+    void Update()
     {
-        if(Detected)
+        if (Detected && fireRate <= 0)
         {
-            Instantiate(bullet);
+            TurretBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as TurretBullet;
+            fireRateTimer = fireRate;
+            fireRateTimer -= Time.deltaTime;
         }
     }
 
