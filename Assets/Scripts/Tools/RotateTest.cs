@@ -14,7 +14,7 @@ public class RotateTest : MonoBehaviour
     {
         rot1 += Time.deltaTime * Rotationx;
         rot2 += Time.deltaTime * Rotationy;
-        rot2 += Time.deltaTime * Rotationz;
+        rot3 += Time.deltaTime * Rotationz;
         Quaternion rot = Quaternion.Euler(rot1, rot2, rot3);
         transform.rotation = rot;
     }

@@ -36,16 +36,6 @@ public class Moto : MonoBehaviour
 
         wheel1.motor = motor;
 
-        //intake
-        if (currentFuel > 150)
-        {
-            Intake.enabled = false;
-        }
-        else
-        {
-            Intake.enabled = true;
-        }
-
         if(health <=0)
         {
             Destroy(gameObject);

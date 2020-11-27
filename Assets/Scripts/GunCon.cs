@@ -17,7 +17,7 @@ public class GunCon : MonoBehaviour
     [SerializeField]
     private GameObject Blow;
     [SerializeField]
-    private GameObject Camera;
+    private GameObject MCamera;
     [SerializeField]
     private GameObject Player;
     private Rigidbody2D prb;
@@ -51,6 +51,7 @@ public class GunCon : MonoBehaviour
     {
         prb = Player.GetComponent<Rigidbody2D>();
         startxscale = GunSprite.transform.localScale[1];
+        MCamera = Camera.main.gameObject;
     }
     private void FixedUpdate()
     {
@@ -268,7 +269,7 @@ public class GunCon : MonoBehaviour
         Suction.transform.localScale = scaleupdate;
         Suction.transform.localPosition = positionupdate;
         Beam.startLifetime = suctionlength/BeamScale;
-        Camera.GetComponent<DynamicCamera>().camerashake(); //camerashake
+        MCamera.GetComponent<DynamicCamera>().camerashake(); //camerashake
     }
 
     private void ScaleBlow()
@@ -280,7 +281,7 @@ public class GunCon : MonoBehaviour
         Blow.transform.localScale = scaleupdate;
         Blow.transform.localPosition = positionupdate;
 
-        Camera.GetComponent<DynamicCamera>().camerashake(); //camerashake
+        MCamera.GetComponent<DynamicCamera>().camerashake(); //camerashake
     }
 
     //This is the collision for removing and object from the scene by setting it to inactive and adding it to the Objectinvacuum list
