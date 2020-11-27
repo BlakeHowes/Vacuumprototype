@@ -65,6 +65,7 @@ public class GunCon : MonoBehaviour
             GunSprite.SetActive(false);
             GunSprite2.SetActive(true);
             AddForceToPlayer(thrust);
+            RemoveChunk();
         }
         else
         {
@@ -230,6 +231,19 @@ public class GunCon : MonoBehaviour
                         joint.enabled = (false);
                     }
                 }
+            }
+        }
+    }
+
+    private void RemoveChunk()
+    {
+        LayerMask mask = LayerMask.GetMask("Chunk");
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, transform.TransformDirection(Vector3.right), Range, mask);
+        if (hit.collider != null)
+        {
+            if (hit.collider.gameObject.TryGetComponent(out ChunkCon chunkcon))
+            {
+                hit.collider.gameObject.GetComponent<ChunkCon>().RemoveChunk();
             }
         }
     }

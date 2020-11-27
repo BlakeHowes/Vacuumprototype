@@ -29,6 +29,7 @@ public class EnemyCar : MonoBehaviour
         SpeedMatchScaleTemp = SpeedMatchScale;
         fire.Pause(true);
         sparks.Pause(true);
+        CarRoot = GameObject.Find("CarRooot");
     }
 
     void Update()
@@ -101,14 +102,6 @@ public class EnemyCar : MonoBehaviour
         if (HealthObjects.Contains(obj))
         {
             HealthObjects.Remove(obj);
-        }
-    }
-
-    public void OnTriggerExit2D(Collision2D collision)
-    {
-        if(CarRoot)
-        {
-            Destroy(gameObject);
         }
     }
 }
