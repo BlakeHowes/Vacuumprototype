@@ -4,31 +4,57 @@ using UnityEngine;
 
 public class EnemyGun : MonoBehaviour
 {
-    Vector3 GunPos;
-
-    private Rigidbody2D ammo;
-    public float angle;
-    public float fireRate;
-    public Transform target;
-    public Sprite bullet;
+    public float setFireRate;
+    public float currentFireRate;
+    public LayerMask Player;
+    public GameObject bullet;
     public Transform firePoint;
+    public bool Detected;
+    public bool isFiring = false;
+    public float range;
 
     void Awake()
     {
-        ammo = GetComponent<Rigidbody2D>();
+        
     }
 
     public void ShootGun()
     {
-        Instantiate(bullet);
+        if(currentFireRate <= 0)
+        {
+            isFiring = true;
+            Instantiate(bullet, firePoint.position, firePoint.rotation);
+        }
+        else
+        {
+            currentFireRate = 0;
+        }
+       
     }
 
     void FixedUpdate()
-    {     
-        //Vector2 relativePos = target.position - transform.position;
-        //Quaternion rotation = Quaternion.LookRotation(relativePos, Vector2.up);
+    {
+        Detected = Physics2D.OverlapCircle(gameObject.transform.position, range, Player);
 
-        //angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        if (Detected)
+        {
+            ShootGun();
+        }
+
+        if(isFiring == true)
+        {
+            currentFireRate -= Time.deltaTime * setFireRate;
+        }
+
+        if(currentFireRate <= 0)
+        {
+            currentFireRate = setFireRate;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(gameObject.transform.position, range);
     }
 }
