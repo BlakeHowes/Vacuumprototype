@@ -26,6 +26,13 @@ public class EnemyTurret : MonoBehaviour
             fireRateTimer = fireRate;
             fireRateTimer -= Time.deltaTime;
         }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            TurretBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as TurretBullet;
+            fireRateTimer = fireRate;
+            fireRateTimer -= Time.deltaTime;
+        }
     }
 
     void OnDrawGizmos()

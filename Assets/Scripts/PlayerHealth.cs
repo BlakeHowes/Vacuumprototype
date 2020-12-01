@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float currentHealth;
     public float setHealth;
+    public float currentHealth;
+    
+    PlayerUI playerUI;
 
     void Start()
     {
+        playerUI = GetComponent<PlayerUI>();
+
         currentHealth = setHealth;
     }
 
@@ -18,10 +22,16 @@ public class PlayerHealth : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            HurtPlayer(20);
+        }
     }
 
     public void HurtPlayer(int damage)
     {
         currentHealth -= damage;
+        playerUI.playerHealth.text = currentHealth.ToString();
     }
 }
