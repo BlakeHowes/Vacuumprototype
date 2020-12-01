@@ -20,6 +20,7 @@ public class CharMovement : MonoBehaviour
     public bool CarMode;
     private float horizontalvelocity;
     public bool spacemode;
+    public GameObject gun;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -105,6 +106,14 @@ public class CharMovement : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Im a bad programmer");
+        if (collision.gameObject.tag == "RemoveObjectsInVacuum")
+        {
+            gun.GetComponent<GunCon>().EmptyGun();
+        }
+    }
     public bool CheckGround()
     {
         Vector2 Pos = (Vector2)transform.position + new Vector2(0, -jumprange);

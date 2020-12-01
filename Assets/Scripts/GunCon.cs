@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GunCon : MonoBehaviour
 {
     [SerializeField]
@@ -27,7 +27,7 @@ public class GunCon : MonoBehaviour
     private Collider2D Gunentrance;
     private float blowtimer;
     [SerializeField]
-    private List<GameObject> Objectinvacuum = new List<GameObject>();
+    public List<GameObject> Objectinvacuum = new List<GameObject>();
     [SerializeField]
     private ParticleSystem Beam;
     [SerializeField]
@@ -41,7 +41,10 @@ public class GunCon : MonoBehaviour
     private bool endlessmode = false;
     [SerializeField]
     private GameObject SpriteEmpty;
-
+    [SerializeField]
+    private Text GunCounttext;
+    [SerializeField]
+    private LayerMask BeamLayers;
     public float BeamScale;
     public float offsetmax;
     public float shakeforce;
@@ -55,6 +58,7 @@ public class GunCon : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        GunCounttext.text = (Objectinvacuum.Count).ToString("00000");
         if (Input.GetMouseButton(0) && !Input.GetMouseButton(1))
         {
             Gunentrance.enabled = true;
@@ -159,8 +163,7 @@ public class GunCon : MonoBehaviour
     private float ReturnVacuumDistance()
     {
         float distancetohit = 0f;
-        LayerMask mask = LayerMask.GetMask("Wall");
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, transform.TransformDirection(Vector3.right),Range, mask);
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, transform.TransformDirection(Vector3.right),Range, BeamLayers);
         if (hit.collider != null)
         {
             Vector2 position = new Vector2(transform.position.x, transform.position.y);
@@ -280,7 +283,7 @@ public class GunCon : MonoBehaviour
 
         Blow.transform.localScale = scaleupdate;
         Blow.transform.localPosition = positionupdate;
-
+        Beam.startLifetime = suctionlength / BeamScale;
         MCamera.GetComponent<DynamicCamera>().camerashake(); //camerashake
     }
 
@@ -334,6 +337,15 @@ public class GunCon : MonoBehaviour
                 Objectinvacuum.Remove(Objectinvacuum[lastobject - 1]);
             }
             prb.AddForce(transform.TransformDirection(Vector2.left) * 1000 * recoilscale);
+        }
+    }
+
+    public void EmptyGun()
+    {
+        foreach(GameObject obj in Objectinvacuum)
+        {
+            Objectinvacuum.Remove(obj);
+            Destroy(obj);
         }
     }
 }

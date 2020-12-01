@@ -7,6 +7,7 @@ TagManager:
   - VacuumObject
   - Ground
   - Car
+  - RemoveObjectsInVacuum
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Button
   - CarWall
   - Chunk
-  - 
+  - RemoveObjectsInVacuum
   - 
   - 
   - 
@@ -58,6 +59,9 @@ TagManager:
     locked: 0
   - name: Car
     uniqueID: 1033689171
+    locked: 0
+  - name: CarWall
+    uniqueID: 3694856685
     locked: 0
   - name: EnemyCar
     uniqueID: 2404450357

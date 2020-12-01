@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Moto : MonoBehaviour
 {
     public HingeJoint2D wheel1;
@@ -13,12 +13,18 @@ public class Moto : MonoBehaviour
     public int health = 100;
     public ParticleSystem sparks;
     public ParticleSystem sparks2;
-
+    public Text healthtext;
     private void Awake()
     {
         sparks.Pause();
         sparks2.Pause();
     }
+
+    public void Update()
+    {
+        healthtext.text = health.ToString();
+    }
+
     void FixedUpdate()
     {
         //Motor
@@ -43,8 +49,9 @@ public class Moto : MonoBehaviour
 
         wheel1.motor = motor;
 
-        if(health <=0)
+        if(health <= 0)
         {
+            healthtext.text = ("0");
             Destroy(gameObject);
         }
     }
