@@ -25,4 +25,12 @@ public class ChunkCon : MonoBehaviour
             }
         }
     }
+
+    public void GetOutOfCar()
+    {
+        gameObject.transform.parent = null;
+        EnemyCar.GetComponent<EnemyCar>().RemoveHealthObject(gameObject);
+        var rb2d = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
+        gameObject.layer = 8;
+    }
 }
