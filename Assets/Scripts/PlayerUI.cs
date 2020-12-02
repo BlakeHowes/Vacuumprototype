@@ -8,4 +8,5 @@ public class PlayerUI : MonoBehaviour
 {
     public TextMeshProUGUI playerHealth;
     public TextMeshProUGUI carFuel;
+    public TextMeshProUGUI carHealth;
 }
