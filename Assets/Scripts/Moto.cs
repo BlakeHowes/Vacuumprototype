@@ -13,11 +13,13 @@ public class Moto : MonoBehaviour
     public int health = 100;
     public ParticleSystem sparks;
     public ParticleSystem sparks2;
+    public ParticleSystem blood;
     public Text healthtext;
     private void Awake()
     {
         sparks.Pause();
         sparks2.Pause();
+        blood.Pause();
     }
 
     public void Update()
@@ -66,8 +68,18 @@ public class Moto : MonoBehaviour
     {
         if(collision.gameObject.tag == "VacuumObject")
         {
-            sparks.Play();
-            sparks2.Play();
+            if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyscript))
+            {
+                if(enemyscript != null)
+                {
+                    blood.Play();
+                }
+            }
+            else
+            {
+                sparks.Play();
+                sparks2.Play();
+            }
             currentFuel += 10;
             Destroy(collision.gameObject);
         }

@@ -30179,6 +30179,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &818298390 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6879045040775212999, guid: b1ee1b3d5c8b5e1459e48334c920b7de,
+    type: 3}
+  m_PrefabInstance: {fileID: 6879045041048228305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &821816110
 GameObject:
   m_ObjectHideFlags: 0
@@ -44469,6 +44475,7 @@ MonoBehaviour:
   sparks: {fileID: 2038811749}
   DeathChunkEmpty: {fileID: 1259449649614219628, guid: 90b9976ee408c544cae36938af41c844,
     type: 3}
+  enemies: []
 --- !u!50 &1371064274
 Rigidbody2D:
   serializedVersion: 4
@@ -71093,10 +71100,20 @@ PrefabInstance:
       propertyPath: healthtext
       value: 
       objectReference: {fileID: 588963250}
+    - target: {fileID: 6879045040649453027, guid: b1ee1b3d5c8b5e1459e48334c920b7de,
+        type: 3}
+      propertyPath: blood
+      value: 
+      objectReference: {fileID: 818298390}
     - target: {fileID: 6879045040649453054, guid: b1ee1b3d5c8b5e1459e48334c920b7de,
         type: 3}
       propertyPath: m_Name
       value: CarRooot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879045040775212994, guid: b1ee1b3d5c8b5e1459e48334c920b7de,
+        type: 3}
+      propertyPath: m_Name
+      value: Blood
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1ee1b3d5c8b5e1459e48334c920b7de, type: 3}

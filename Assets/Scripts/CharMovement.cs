@@ -108,7 +108,6 @@ public class CharMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Im a bad programmer");
         if (collision.gameObject.tag == "RemoveObjectsInVacuum")
         {
             gun.GetComponent<GunCon>().EmptyGun();

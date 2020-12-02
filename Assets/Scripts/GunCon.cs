@@ -4,25 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GunCon : MonoBehaviour
 {
-    [SerializeField]
-    private float Range;
-    [SerializeField]
-    private float Blowdelay;
-    [SerializeField]
-    private float recoilscale;
-    [SerializeField]
-    private float BlowRandomization;
-    [SerializeField]
-    private GameObject Suction;
-    [SerializeField]
-    private GameObject Blow;
-    [SerializeField]
-    private GameObject MCamera;
-    [SerializeField]
-    private GameObject Player;
-    private Rigidbody2D prb;
-    [SerializeField]
-    private GameObject BlowLocation;
+    [SerializeField] private float Range;
+    [SerializeField] private float Blowdelay;
+    [SerializeField] private float recoilscale;
+    [SerializeField] private float BlowRandomization;
+    [SerializeField] private GameObject Suction;
+    [SerializeField] private GameObject Blow;
+    [SerializeField] private GameObject MCamera;
+    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject BlowLocation;
     [SerializeField]
     private Collider2D Gunentrance;
     private float blowtimer;
@@ -45,6 +35,7 @@ public class GunCon : MonoBehaviour
     private Text GunCounttext;
     [SerializeField]
     private LayerMask BeamLayers;
+    private Rigidbody2D prb;
     public float BeamScale;
     public float offsetmax;
     public float shakeforce;

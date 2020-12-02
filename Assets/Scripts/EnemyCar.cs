@@ -69,6 +69,7 @@ public class EnemyCar : MonoBehaviour
                 Instantiate(DeathChunkEmpty, transform.position, Quaternion.identity);
                 for (int i = 0; i < enemies.Length; i++)
                 {
+                    var rb2d = enemies[i].AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
                     enemies[i].transform.parent = null;
                 }
                 Destroy(gameObject); //car death
