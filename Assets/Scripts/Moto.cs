@@ -22,7 +22,10 @@ public class Moto : MonoBehaviour
 
     public void Update()
     {
-        healthtext.text = health.ToString();
+        if(healthtext != null)
+        {
+            healthtext.text = health.ToString();
+        }
     }
 
     void FixedUpdate()
@@ -51,7 +54,10 @@ public class Moto : MonoBehaviour
 
         if(health <= 0)
         {
-            healthtext.text = ("0");
+            if(healthtext != null)
+            {
+                healthtext.text = ("0");
+            }
             Destroy(gameObject);
         }
     }

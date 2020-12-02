@@ -58,7 +58,10 @@ public class GunCon : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        GunCounttext.text = (Objectinvacuum.Count).ToString("00000");
+        if(GunCounttext != null)
+        {
+            GunCounttext.text = (Objectinvacuum.Count).ToString("00000");
+        }
         if (Input.GetMouseButton(0) && !Input.GetMouseButton(1))
         {
             Gunentrance.enabled = true;
