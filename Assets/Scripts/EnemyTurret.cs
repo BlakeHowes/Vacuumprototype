@@ -27,7 +27,7 @@ public class EnemyTurret : MonoBehaviour
             fireRateTimer -= Time.deltaTime;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             TurretBullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as TurretBullet;
             fireRateTimer = fireRate;
