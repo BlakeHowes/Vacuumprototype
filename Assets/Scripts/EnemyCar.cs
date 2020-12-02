@@ -24,6 +24,7 @@ public class EnemyCar : MonoBehaviour
     private ParticleSystem sparks;
     [SerializeField]
     private GameObject DeathChunkEmpty;
+    private GameObject[] enemies;
     void Start()
     {
         SpeedMatchScaleTemp = SpeedMatchScale;
@@ -65,7 +66,11 @@ public class EnemyCar : MonoBehaviour
             if (DeathTimer > 5)
             {
                 Instantiate(DeathChunkEmpty, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                for (int i = 0; i < enemies.Length; i++)
+                {
+                    enemies[i].transform.parent = null;
+                }
+                Destroy(gameObject); //car death
             }
         }
 

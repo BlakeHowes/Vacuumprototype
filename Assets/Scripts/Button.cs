@@ -14,6 +14,7 @@ public class Button : MonoBehaviour
     public Color resetcolor;
     public GameObject Statue;
     public GameObject platform;
+    public GameObject exit;
     private void Start()
     {
         var rend = GetComponent<SpriteRenderer>();
@@ -56,6 +57,7 @@ public class Button : MonoBehaviour
             flash();
             Destroy(Statue.gameObject);
             Destroy(platform.gameObject);
+            Destroy(exit.gameObject);
         }
     }
 
