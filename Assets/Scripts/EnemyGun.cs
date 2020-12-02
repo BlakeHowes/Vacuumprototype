@@ -20,7 +20,7 @@ public class EnemyGun : MonoBehaviour
 
     public void ShootGun()
     {
-        if(coolDownTime <= 0)
+        if(coolDownTime <= 0)  
         {          
             isFiring = true;
             Instantiate(bullet, firePoint.position, firePoint.rotation);
