@@ -24,6 +24,7 @@ public class EnemyCar : MonoBehaviour
     private ParticleSystem sparks;
     [SerializeField]
     private GameObject DeathChunkEmpty;
+    [SerializeField]
     private GameObject[] enemies;
     void Start()
     {
