@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyGun : MonoBehaviour
 {
     public float setFireRate;
-    public float currentFireRate;
+    public float coolDownTime;
     public LayerMask Player;
     public GameObject bullet;
     public Transform firePoint;
@@ -20,35 +20,25 @@ public class EnemyGun : MonoBehaviour
 
     public void ShootGun()
     {
-        if(currentFireRate <= 0)
-        {
+        if(coolDownTime <= 0)
+        {          
             isFiring = true;
             Instantiate(bullet, firePoint.position, firePoint.rotation);
+            coolDownTime = setFireRate;
         }
         else
         {
-            currentFireRate = 0;
-        }
-       
+            coolDownTime -= Time.deltaTime;
+        }   
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Detected = Physics2D.OverlapCircle(gameObject.transform.position, range, Player);
 
         if (Detected)
         {
             ShootGun();
-        }
-
-        if(isFiring == true)
-        {
-            currentFireRate -= Time.deltaTime * setFireRate;
-        }
-
-        if(currentFireRate <= 0)
-        {
-            currentFireRate = setFireRate;
         }
     }
 

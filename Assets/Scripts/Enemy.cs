@@ -18,17 +18,6 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    void FixedUpdate()
-    {
-        if (enemyCar.transform.parent != null)
-        {
-            inCar = false;
-        }
-        else
-        {
-            inCar = true;
-        }
-    }
 
     void Update()
     {
@@ -39,8 +28,16 @@ public class Enemy : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, player.position.y), speed * Time.deltaTime);
             Vector2 direction = player.transform.position - transform.position * speed * Time.deltaTime;
             Debug.Log("direction");
-        }     
+        }
         //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);     
+        if (enemyCar.transform.parent != null)
+        {
+            inCar = true;
+        }
+        else
+        {
+            inCar = false;
+        }
     }
 
     void OnDrawGizmos()
