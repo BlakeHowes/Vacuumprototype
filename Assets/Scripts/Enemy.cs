@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("direction");
         }
         //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);     
-        if (enemyCar.transform.parent != null)
+        if (gameObject.transform.parent != null)
         {
             inCar = true;
         }
