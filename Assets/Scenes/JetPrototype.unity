@@ -23461,6 +23461,19 @@ MonoBehaviour:
     m_Bits: 2048
   player: {fileID: 1796426596}
   enemyCar: {fileID: 299996165}
+--- !u!114 &990042371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990042366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85ec58c0b1509b47b1abd157e8a1bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyCar: {fileID: 299996165}
 --- !u!1 &994386799
 GameObject:
   m_ObjectHideFlags: 0
@@ -46572,6 +46585,17 @@ PrefabInstance:
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 7739089166735907248}
+    - target: {fileID: 3121845137779243715, guid: 5f728340739ea2b4aa96646a2fca542d,
+        type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: -3953521707064935326, guid: 3164aa1ccdc65064fabbce7d8be54a1c,
+        type: 3}
+    - target: {fileID: 3121845137779243715, guid: 5f728340739ea2b4aa96646a2fca542d,
+        type: 3}
+      propertyPath: fireRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6408823000200921662, guid: 5f728340739ea2b4aa96646a2fca542d,
         type: 3}
       propertyPath: m_LocalRotation.x
