@@ -15,7 +15,7 @@ public class TurretBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Car")
         {
-            collision.gameObject.GetComponent<Moto>().health(damage);
+            //collision.gameObject.GetComponent<Moto>().health(damage);
         }
     }
 }

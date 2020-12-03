@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     public LayerMask Player;
     public Transform player;
     public GameObject enemyCar;
+    public Transform playerCar;
 
     void Awake()
     {

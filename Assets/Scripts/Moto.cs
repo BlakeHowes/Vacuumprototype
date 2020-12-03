@@ -15,6 +15,7 @@ public class Moto : MonoBehaviour
     public ParticleSystem sparks2;
     public ParticleSystem blood;
     public Text healthtext;
+    PlayerUI playerUI;
     private void Awake()
     {
         sparks.Pause();
@@ -101,11 +102,6 @@ public class Moto : MonoBehaviour
     {
         SpeedSetting = 40;
         consumptionRate = 3;
-    }
-
-    public void HealthDamage(int damage)
-    {
-        health -= damage;
     }
 }
 
