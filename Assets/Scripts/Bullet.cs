@@ -28,9 +28,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(gameObject.tag == "Player")
+        if(gameObject.tag == "Car")
         {
-            collision.gameObject.GetComponent<PlayerHealth>().HurtPlayer(damage);
+            collision.gameObject.GetComponent<Moto>().TakeDamage(damage);
         }
         Destroy(gameObject);
     }

@@ -103,5 +103,11 @@ public class Moto : MonoBehaviour
         SpeedSetting = 40;
         consumptionRate = 3;
     }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        healthtext.text = health.ToString();
+    }
 }
 

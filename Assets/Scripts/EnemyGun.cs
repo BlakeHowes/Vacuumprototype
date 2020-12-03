@@ -6,7 +6,7 @@ public class EnemyGun : MonoBehaviour
 {
     public float setFireRate;
     public float coolDownTime;
-    public LayerMask Player;
+    public LayerMask Car;
     public GameObject bullet;
     public Transform firePoint;
     public bool Detected;
@@ -34,7 +34,7 @@ public class EnemyGun : MonoBehaviour
 
     void Update()
     {
-        Detected = Physics2D.OverlapCircle(gameObject.transform.position, range, Player);
+        Detected = Physics2D.OverlapCircle(gameObject.transform.position, range, Car);
 
         if (Detected)
         {

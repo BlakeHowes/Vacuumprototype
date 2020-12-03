@@ -10,10 +10,8 @@ public class Enemy : MonoBehaviour
     public float health;
     public float range;
     public bool Detected;
-    public LayerMask Player;
-    public Transform player;
-    public GameObject enemyCar;
-    public Transform playerCar;
+    public LayerMask Car;
+    public Transform car;
 
     void Awake()
     {
@@ -22,12 +20,12 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Detected = Physics2D.OverlapCircle(gameObject.transform.position, range, Player);
+        Detected = Physics2D.OverlapCircle(gameObject.transform.position, range, Car);
 
         if (Detected == false && inCar == false)
         {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, player.position.y), speed * Time.deltaTime);
-            Vector2 direction = player.transform.position - transform.position * speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(car.position.x, car.position.y), speed * Time.deltaTime);
+            Vector2 direction = car.transform.position - transform.position * speed * Time.deltaTime;
             Debug.Log("direction");
         }
         //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);     

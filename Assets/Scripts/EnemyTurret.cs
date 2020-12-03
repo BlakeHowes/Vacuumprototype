@@ -7,8 +7,8 @@ public class EnemyTurret : MonoBehaviour
     public bool Detected;
     public bool isFiring = false;
     public float range;
-    public GameObject Car;
-    public LayerMask Player;
+    public GameObject CarRoot;
+    public LayerMask Car;
     public TurretBullet bullet;
     public Transform firePoint;
     public float setFireRate;
@@ -30,7 +30,7 @@ public class EnemyTurret : MonoBehaviour
 
     void Update()
     {
-        Detected = Physics2D.OverlapCircle(gameObject.transform.position, range, Player);
+        Detected = Physics2D.OverlapCircle(gameObject.transform.position, range, Car);
 
         if(Detected)
         {
