@@ -45,6 +45,9 @@ TagManager:
   - name: sky
     uniqueID: 3655300023
     locked: 0
+  - name: 4
+    uniqueID: 1521256133
+    locked: 0
   - name: Background3
     uniqueID: 2380163303
     locked: 0
@@ -77,4 +80,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 291825459
+    locked: 0
+  - name: New Layer
+    uniqueID: 1684435789
     locked: 0
