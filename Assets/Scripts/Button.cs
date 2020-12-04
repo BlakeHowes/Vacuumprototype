@@ -8,6 +8,7 @@ public class Button : MonoBehaviour
     public bool Low;
     public bool high;
     public bool Temple;
+    public bool Level1;
     public GameObject CarRoot;
     public float timer;
     public bool BeginReset = false;
@@ -15,6 +16,8 @@ public class Button : MonoBehaviour
     public GameObject Statue;
     public GameObject platform;
     public GameObject exit;
+    public GameObject Level1Exit;
+    public GameObject Level1Exit2;
     private void Start()
     {
         var rend = GetComponent<SpriteRenderer>();
@@ -58,6 +61,12 @@ public class Button : MonoBehaviour
             Destroy(Statue.gameObject);
             Destroy(platform.gameObject);
             Destroy(exit.gameObject);
+        }
+        if(Level1 == true)
+        {
+            flash();
+            Destroy(Level1Exit);
+            Destroy(Level1Exit2);
         }
     }
 
