@@ -193,7 +193,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1060956
 GameObject:
@@ -4126,7 +4126,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &151965322
 GameObject:
@@ -21428,7 +21428,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &543473723
 MonoBehaviour:
@@ -32254,12 +32254,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3055006564828465276}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &912262686 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3055006565136748130, guid: 8d95f3b3f68e47641b832a0d0f9f7368,
-    type: 3}
-  m_PrefabInstance: {fileID: 3055006564828465276}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &914023159
 GameObject:
   m_ObjectHideFlags: 0
@@ -41199,7 +41193,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1232346206
 MonoBehaviour:
@@ -62929,7 +62923,7 @@ Transform:
   - {fileID: 872393296}
   - {fileID: 914023160}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1991247082
 MonoBehaviour:
@@ -71824,11 +71818,10 @@ MonoBehaviour:
   health: 100
   range: 40
   Detected: 0
-  Player:
+  Car:
     serializedVersion: 2
-    m_Bits: 2048
-  player: {fileID: 912262686}
-  enemyCar: {fileID: 1371064272}
+    m_Bits: 0
+  car: {fileID: 0}
 --- !u!61 &2570751103696352789
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -71890,7 +71883,7 @@ PrefabInstance:
     - target: {fileID: 3055006565136748130, guid: 8d95f3b3f68e47641b832a0d0f9f7368,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.7
+      value: -75.2
       objectReference: {fileID: 0}
     - target: {fileID: 3055006565136748130, guid: 8d95f3b3f68e47641b832a0d0f9f7368,
         type: 3}
@@ -71920,7 +71913,7 @@ PrefabInstance:
     - target: {fileID: 3055006565136748130, guid: 8d95f3b3f68e47641b832a0d0f9f7368,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3055006565136748130, guid: 8d95f3b3f68e47641b832a0d0f9f7368,
         type: 3}
@@ -72256,9 +72249,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setFireRate: 3
   coolDownTime: 0
-  Player:
+  Car:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
   bullet: {fileID: 7758126656305160142, guid: 943edddb9a60603438c6633cf3b40919, type: 3}
   firePoint: {fileID: 9009711749406630440}
   Detected: 0
