@@ -10490,7 +10490,7 @@ MonoBehaviour:
   GunCounttext: {fileID: 0}
   BeamLayers:
     serializedVersion: 2
-    m_Bits: 66048
+    m_Bits: 82432
   BeamScale: 57.8
   offsetmax: 0
   shakeforce: 0.62

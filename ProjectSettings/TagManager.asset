@@ -9,6 +9,7 @@ TagManager:
   - Car
   - RemoveObjectsInVacuum
   - Platform
+  - SpawnEnemyArea
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - Chunk
   - RemoveObjectsInVacuum
   - Car
-  - 
+  - SpawnEmemies
   - 
   - 
   - 
