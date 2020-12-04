@@ -19,7 +19,10 @@ public class ChunkCon : MonoBehaviour
             if(removedcheck == false)
             {
                 gameObject.transform.parent = null;
-                EnemyCar.GetComponent<EnemyCar>().RemoveHealthObject(gameObject);
+                if (EnemyCar.GetComponent<EnemyCar>().HealthObjects.Contains(gameObject))
+                {
+                    EnemyCar.GetComponent<EnemyCar>().RemoveHealthObject(gameObject);
+                }
                 var rb2d = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
                 gameObject.layer = 8;
             }
@@ -28,14 +31,25 @@ public class ChunkCon : MonoBehaviour
 
     public void OnDestroy()
     {
-        EnemyCar.GetComponent<EnemyCar>().RemoveHealthObject(gameObject);
+        if(EnemyCar != null)
+        {
+            if (EnemyCar.GetComponent<EnemyCar>().HealthObjects.Contains(gameObject))
+            {
+                EnemyCar.GetComponent<EnemyCar>().RemoveHealthObject(gameObject);
+            }
+        }
     }
 
     public void GetOutOfCar()
     {
-        gameObject.transform.parent = null;
-        EnemyCar.GetComponent<EnemyCar>().RemoveHealthObject(gameObject);
-        var rb2d = gameObject.AddComponent(typeof(Rigidbody2D)) as Rigidbody2D;
-        gameObject.layer = 8;
+        if (EnemyCar != null)
+        {
+            gameObject.transform.parent = null;
+            if (EnemyCar.GetComponent<EnemyCar>().HealthObjects.Contains(gameObject))
+            {
+                EnemyCar.GetComponent<EnemyCar>().RemoveHealthObject(gameObject);
+            }
+            gameObject.layer = 8;
+        }
     }
 }

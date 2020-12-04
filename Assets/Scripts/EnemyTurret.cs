@@ -28,6 +28,7 @@ public class EnemyTurret : MonoBehaviour
             {
                 Instantiate(bullet, firePoint.position, firePoint.rotation);
                 coolDownTimer = 0;
+                CarRoot.GetComponent<Moto>().RemoveHealth();
             }
         }
     }

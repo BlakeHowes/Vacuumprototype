@@ -66,34 +66,52 @@ public class Moto : MonoBehaviour
         }
     }
 
+    public void AddHealth()
+    {
+        health += 5;
+        if(health > 100)
+        {
+            health = 100;
+        }
+    }
+
+    public void RemoveHealth()
+    {
+        health--;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject col = collision.gameObject;
-        if(col.layer == LayerMask.GetMask("Chunk"))
+        if(collision.gameObject != null)
         {
-            col.TryGetComponent<ChunkCon>(out ChunkCon con);
-            if(con != null)
+            if (collision.gameObject.layer == LayerMask.GetMask("Chunk"))
             {
-                con.RemoveChunk();
-            }
-        }
-
-        if(collision.gameObject.tag == "VacuumObject")
-        {
-            if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyscript))
-            {
-                if(enemyscript != null)
+                collision.gameObject.TryGetComponent<ChunkCon>(out ChunkCon con);
+                if (con != null)
                 {
-                    blood.Play();
+                    con.RemoveChunk();
                 }
             }
-            else
+
+            if (collision.gameObject.tag == "VacuumObject")
             {
-                sparks.Play();
-                sparks2.Play();
+                if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyscript))
+                {
+                    if (enemyscript != null)
+                    {
+                        blood.Play();
+                        Debug.Log("Blood");
+                    }
+                }
+                else
+                {
+                    sparks.Play();
+                    sparks2.Play();
+                }
+                currentFuel += 10;
+                AddHealth();
+                Destroy(collision.gameObject);
             }
-            currentFuel += 10;
-            Destroy(collision.gameObject);
         }
     }
 

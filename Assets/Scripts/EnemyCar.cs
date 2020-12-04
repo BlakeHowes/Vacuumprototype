@@ -14,7 +14,7 @@ public class EnemyCar : MonoBehaviour
     [SerializeField]
     private HingeJoint2D Wheel;
     [SerializeField]
-    private List<GameObject> HealthObjects = new List<GameObject>();
+    public List<GameObject> HealthObjects = new List<GameObject>();
     private float timer;
     private float SpeedMatchScaleTemp;
     private float DeathTimer;
