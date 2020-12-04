@@ -16,6 +16,7 @@ public class Moto : MonoBehaviour
     public ParticleSystem blood;
     public Text healthtext;
     PlayerUI playerUI;
+    public GameObject Tutorial;
     private void Awake()
     {
         sparks.Pause();
@@ -67,6 +68,16 @@ public class Moto : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameObject col = collision.gameObject;
+        if(col.layer == LayerMask.GetMask("Chunk"))
+        {
+            col.TryGetComponent<ChunkCon>(out ChunkCon con);
+            if(con != null)
+            {
+                con.RemoveChunk();
+            }
+        }
+
         if(collision.gameObject.tag == "VacuumObject")
         {
             if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyscript))
@@ -90,18 +101,30 @@ public class Moto : MonoBehaviour
     {
         SpeedSetting = 0;
         consumptionRate = 0;
+        if(Tutorial.activeSelf == true)
+        {
+            Tutorial.SetActive(false);
+        }
     }
 
     public void LowGear()
     {
         SpeedSetting = 10;
         consumptionRate = 1;
+        if (Tutorial.activeSelf == true)
+        {
+            Tutorial.SetActive(false);
+        }
     }
 
     public void HighGear()
     {
         SpeedSetting = 40;
         consumptionRate = 3;
+        if (Tutorial.activeSelf == true)
+        {
+            Tutorial.SetActive(false);
+        }
     }
 
     public void TakeDamage(int damage)

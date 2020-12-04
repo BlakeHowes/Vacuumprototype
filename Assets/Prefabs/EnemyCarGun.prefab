@@ -56,7 +56,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8962436975191139811}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -17.157873, y: 7.393376, z: -0.000020226233}
   m_LocalScale: {x: 10.604371, y: 2.1208742, z: 2.1208742}
   m_Children:
@@ -127,13 +127,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84fa965eda2e364f9ffebd10673d257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detected: 0
-  radius: 10
-  Car: {fileID: 0}
-  Player:
+  range: 5
+  CarRoot: {fileID: 0}
+  Car:
     serializedVersion: 2
-    m_Bits: 2048
-  bullet: {fileID: 4273618011362251531, guid: 447700cb829654f4593734b413871d2d, type: 3}
+    m_Bits: 65536
+  bullet: {fileID: -3953521707064935326, guid: 3164aa1ccdc65064fabbce7d8be54a1c, type: 3}
+  firePoint: {fileID: 1135835082206010651}
+  BulletsPerSecond: 5
 --- !u!114 &8962436975191139815
 MonoBehaviour:
   m_ObjectHideFlags: 0

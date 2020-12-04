@@ -75,14 +75,6 @@ public class EnemyCar : MonoBehaviour
                 Destroy(gameObject); //car death
             }
         }
-
-        foreach(GameObject obj in HealthObjects)
-        {
-            if(obj == null)
-            {
-                HealthObjects.Remove(obj);
-            }
-        }
     }
     private void DriveLeft()
     {

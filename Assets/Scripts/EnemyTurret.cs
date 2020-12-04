@@ -4,38 +4,37 @@ using UnityEngine;
 
 public class EnemyTurret : MonoBehaviour
 {
-    public bool Detected;
-    public bool isFiring = false;
     public float range;
     public GameObject CarRoot;
     public LayerMask Car;
     public TurretBullet bullet;
     public Transform firePoint;
-    public float setFireRate;
-    public float coolDownTime;
+    public float BulletsPerSecond;
+    private float coolDownTimer;
+
+    private void OnEnable()
+    {
+        GetComponent<RotateTarget>().target = GameObject.Find("CarRooot");
+        CarRoot = GameObject.Find("CarRooot");
+    }
 
     void ShootGun()
     {
-        if (coolDownTime <= 0)
+        coolDownTimer += Time.deltaTime;
+        if (coolDownTimer >= BulletsPerSecond)
         {
-            isFiring = true;
-            Instantiate(bullet, firePoint.position, firePoint.rotation);
-            coolDownTime = setFireRate;
-        }
-        else
-        {
-            coolDownTime -= Time.deltaTime;
+            bool Detected = Physics2D.OverlapCircle(gameObject.transform.position, range, Car);
+            if (Detected == true)
+            {
+                Instantiate(bullet, firePoint.position, firePoint.rotation);
+                coolDownTimer = 0;
+            }
         }
     }
 
     void Update()
     {
-        Detected = Physics2D.OverlapCircle(gameObject.transform.position, range, Car);
-
-        if(Detected)
-        {
-            ShootGun();
-        }
+        ShootGun();
     }
 
     void OnDrawGizmos()

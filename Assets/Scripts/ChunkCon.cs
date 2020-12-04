@@ -26,6 +26,11 @@ public class ChunkCon : MonoBehaviour
         }
     }
 
+    public void OnDestroy()
+    {
+        EnemyCar.GetComponent<EnemyCar>().RemoveHealthObject(gameObject);
+    }
+
     public void GetOutOfCar()
     {
         gameObject.transform.parent = null;
