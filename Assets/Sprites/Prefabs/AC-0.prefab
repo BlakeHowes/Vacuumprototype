@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4491644538569598428}
   - component: {fileID: 1408034910365598260}
-  - component: {fileID: 339333839796666977}
   - component: {fileID: 3573978691150448947}
   - component: {fileID: 1623130006553322338}
+  - component: {fileID: 8450045109202306955}
   m_Layer: 14
   m_Name: Cage 2
   m_TagString: Untagged
@@ -85,32 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &339333839796666977
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5238850251769024201}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.08763504, y: -0.058318615}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 24.800001, y: 24.800001}
-    newSize: {x: 24.800001, y: 24.800001}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 18.328152, y: 17.801636}
-  m_EdgeRadius: 0
 --- !u!249 &3573978691150448947
 AreaEffector2D:
   serializedVersion: 2
@@ -146,6 +120,22 @@ MonoBehaviour:
   Rotationx: 0
   Rotationy: 0
   Rotationz: 100
+--- !u!58 &8450045109202306955
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5238850251769024201}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.14542669, y: 0}
+  serializedVersion: 2
+  m_Radius: 10.505138
 --- !u!1 &7930920147071294918
 GameObject:
   m_ObjectHideFlags: 0
