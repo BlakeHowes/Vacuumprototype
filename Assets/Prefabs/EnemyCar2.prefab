@@ -11911,7 +11911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89e3bf061629c049ad0237bd8354d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CarRoot: {fileID: 0}
+  CarRoot: {fileID: 262484509125033023, guid: ec475755d5be46242bcf26a6caef699d, type: 3}
   Range: 100
   Speed: 300
   SpeedMatchScale: 12
@@ -12712,7 +12712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 41.89
-  CarRoot: {fileID: 0}
+  CarRoot: {fileID: 6879045040649453054, guid: b1ee1b3d5c8b5e1459e48334c920b7de, type: 3}
   Car:
     serializedVersion: 2
     m_Bits: 65536

@@ -18,6 +18,9 @@ public class Button : MonoBehaviour
     public GameObject exit;
     public GameObject Level1Exit;
     public GameObject Level1Exit2;
+    public GameObject Level1Exit3;
+    public GameObject Level1Exit4;
+
     private void Start()
     {
         var rend = GetComponent<SpriteRenderer>();
@@ -67,6 +70,8 @@ public class Button : MonoBehaviour
             flash();
             Destroy(Level1Exit);
             Destroy(Level1Exit2);
+            Destroy(Level1Exit3);
+            Destroy(Level1Exit4);
         }
     }
 
