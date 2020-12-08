@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(car.position.x, car.position.y), speed * Time.deltaTime);
             Vector2 direction = car.transform.position - transform.position * speed * Time.deltaTime;
-            Debug.Log("direction");
+            //Debug.Log("direction");
         }
         //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);     
         if (gameObject.transform.parent != null)

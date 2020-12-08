@@ -11,7 +11,7 @@ public class Endgame : MonoBehaviour
     {
         if(collision.gameObject.tag == "Car")
         {           
-            StartCoroutine (End());
+            StartCoroutine(End());
         }       
     }
 
@@ -19,8 +19,9 @@ public class Endgame : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         CarRoot.gameObject.GetComponent<Moto>().Off();
+        Debug.Log("Off");
         yield return new WaitForSeconds(3);
-        //SceneManager.LoadScene(Menu);
-
+        SceneManager.LoadScene(sceneName: "MainMenu");
+        Debug.Log("Menu");
     }
 }
