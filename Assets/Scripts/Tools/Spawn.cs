@@ -23,7 +23,7 @@ public class Spawn : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position, spawn.transform.position) <= SpawnRange)
                 {
-                    var spawnedobject = Instantiate(Items[Random.Range(0, Items.Count)], transform.position, Quaternion.identity);
+                    var spawnedobject = Instantiate(Items[Random.Range(0, Items.Count)], new Vector3(transform.position.x,5,0), Quaternion.identity);
                     spawnedobject.transform.localScale = spawnedobject.transform.localScale * Random.Range(ScaleMax, ScaleMin);
                     spawmtimer = 0f;
                 }
